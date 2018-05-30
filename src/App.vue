@@ -40,7 +40,8 @@
             <v-list-tile
               v-for="(child, i) in item.children"
               :key="i"
-              @click=""
+              @click="goTo(child.pathName)"
+              class="grey lighten-3"
             >
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -52,7 +53,7 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else @click="" :key="item.text">
+          <v-list-tile v-else @click="goTo(item.pathName)" :key="item.text">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -101,7 +102,9 @@
     </v-toolbar>
     <v-content>
       <v-container fluid>
-        <router-view/>
+        <transition name="fade" mode="out-in" :duration="{ enter: 100, leave: 50 }">
+          <router-view />
+        </transition>
         <!-- <v-layout>
           <v-tooltip right>
             <v-btn
@@ -207,16 +210,16 @@
       dialog: false,
       drawer: null,
       items: [
-        { icon: 'contacts', text: 'Contacts' },
-        { icon: 'history', text: 'Frequently contacted' },
-        { icon: 'content_copy', text: 'Duplicates' },
+        { icon: 'contacts', text: 'Users', pathName: 'user' },
+        { icon: 'history', text: 'Frequently contacted', pathName: 'home' },
+        { icon: 'content_copy', text: 'Duplicates', pathName: 'home' },
         {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
           text: 'Labels',
           model: true,
           children: [
-            { icon: 'add', text: 'Create label' }
+            { icon: 'add', text: 'Create label', pathName: 'home' }
           ]
         },
         {
@@ -225,22 +228,27 @@
           text: 'More',
           model: false,
           children: [
-            { text: 'Import' },
-            { text: 'Export' },
-            { text: 'Print' },
-            { text: 'Undo changes' },
-            { text: 'Other contacts' }
+            { text: 'Import', pathName: 'home' },
+            { text: 'Export', pathName: 'home' },
+            { text: 'Print', pathName: 'home' },
+            { text: 'Undo changes', pathName: 'home' },
+            { text: 'Other contacts', pathName: 'home' }
           ]
         },
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'chat_bubble', text: 'Send feedback' },
-        { icon: 'help', text: 'Help' },
-        { icon: 'phonelink', text: 'App downloads' },
-        { icon: 'keyboard', text: 'Go to the old version' }
+        { icon: 'settings', text: 'Settings', pathName: 'home' },
+        { icon: 'chat_bubble', text: 'Send feedback', pathName: 'home' },
+        { icon: 'help', text: 'Help', pathName: 'home' },
+        { icon: 'phonelink', text: 'App downloads', pathName: 'home' },
+        { icon: 'keyboard', text: 'Go to the old version', pathName: 'home' }
       ]
     }),
     props: {
       source: String
+    },
+    methods: {
+      goTo (path) {
+        this.$router.push({ name: path })
+      }
     }
   }
 </script>
