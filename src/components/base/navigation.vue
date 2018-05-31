@@ -35,12 +35,18 @@
   </v-toolbar>
 </template>
 <script>
+  import store from '@/store'
   export default {
     data: () => ({
-      drawer: null
+      drawer: store.getters.drawer
     }),
     props: {
       source: String
+    },
+    watch: {
+      drawer (val) {
+        store.dispatch('setDrawer', this.drawer)
+      }
     },
     methods: {
       goTo (path) {

@@ -3,7 +3,7 @@
     fixed
     :clipped="$vuetify.breakpoint.mdAndUp"
     app
-    v-model="drawer"
+    :value="drawer"
   >
     <v-list dense>
       <template v-for="item in items">
@@ -67,9 +67,9 @@
   </v-navigation-drawer>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     data: () => ({
-      drawer: null,
       items: [
         { icon: 'contacts', text: 'Users', pathName: 'user' },
         { icon: 'history', text: 'Frequently contacted', pathName: 'home' },
@@ -102,6 +102,9 @@
         { icon: 'phonelink', text: 'App downloads', pathName: 'home' },
         { icon: 'keyboard', text: 'Go to the old version', pathName: 'home' }
       ]
+    }),
+    computed: mapGetters({
+      drawer: 'drawer'
     }),
     props: {
       source: String

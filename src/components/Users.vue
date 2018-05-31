@@ -224,7 +224,7 @@
         company: 'agacat',
         position: 'Developer'
       }
-      // Save the practice question in store
+      // Save the profile in store
       store.dispatch('setProfile', profile)
       console.log(store.getters.profile)
       this.getDataFromApi()
