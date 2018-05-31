@@ -125,6 +125,7 @@
 </template>
 
 <script>
+  import store from '@/store'
   export default {
     data () {
       return {
@@ -215,6 +216,17 @@
       }
     },
     mounted () {
+      var profile = {
+        name: 'Aga Atmaja',
+        photo: 'https://hrmlabsv2.s3.ap-southeast-1.amazonaws.com/internal/images/employees/5aebfae216472f35a5191912.png?7300',
+        phone: '081213551169',
+        email: 'aga@gmail.com',
+        company: 'agacat',
+        position: 'Developer'
+      }
+      // Save the practice question in store
+      store.dispatch('setProfile', profile)
+      console.log(store.getters.profile)
       this.getDataFromApi()
         .then(data => {
           this.desserts = data.items
@@ -226,7 +238,7 @@
         this.loading = true
         return new Promise((resolve, reject) => {
           const { sortBy, descending, page, rowsPerPage } = this.pagination
-          console.log(this.pagination)
+          // console.log(this.pagination)
 
           let items = this.getDesserts()
           const total = items.length
