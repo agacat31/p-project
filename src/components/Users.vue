@@ -218,7 +218,7 @@
     mounted () {
       var profile = {
         name: 'Aga Atmaja',
-        photo: 'https://hrmlabsv2.s3.ap-southeast-1.amazonaws.com/internal/images/employees/5aebfae216472f35a5191912.png?7300',
+        photo: 'https://hrmlabsv2.s3.ap-southeast-1.amazonaws.com/internal/images/employees/5ae289d216472f28851b6eb2.png?8905',
         phone: '081213551169',
         email: 'aga@gmail.com',
         company: 'agacat',
