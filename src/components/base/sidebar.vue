@@ -67,6 +67,7 @@
   </v-navigation-drawer>
 </template>
 <script>
+  import store from '@/store'
   import { mapGetters } from 'vuex'
   export default {
     data: () => ({
@@ -78,7 +79,7 @@
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
           text: 'Labels',
-          model: true,
+          model: false,
           children: [
             { icon: 'add', text: 'Create label', pathName: 'home' }
           ]
@@ -100,18 +101,26 @@
         { icon: 'chat_bubble', text: 'Send feedback', pathName: 'home' },
         { icon: 'help', text: 'Help', pathName: 'home' },
         { icon: 'phonelink', text: 'App downloads', pathName: 'home' },
-        { icon: 'keyboard', text: 'Go to the old version', pathName: 'home' }
+        { icon: 'lock', text: 'Logout', pathName: 'logout' }
       ]
     }),
     computed: mapGetters({
-      drawer: 'drawer'
+      drawer: 'drawer',
+      auth: 'auth'
     }),
     props: {
       source: String
     },
     methods: {
       goTo (path) {
-        this.$router.push({ name: path })
+        if (path === 'logout') {
+          this.$session.destroy()
+          window.localStorage.clear()
+          store.dispatch('setAuth', false)
+          this.$router.push('/login')
+        } else {
+          this.$router.push({ name: path })
+        }
       }
     }
   }

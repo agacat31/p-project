@@ -1,7 +1,5 @@
 <template>
-  <v-app id="inspire">
-    <baseTemplate></basetemplate>
-  </v-app>
+  <baseTemplate></basetemplate>
 </template>
 <style src="./styles/main.scss" lang="scss"></style>
 <script>

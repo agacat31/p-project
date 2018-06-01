@@ -125,7 +125,7 @@
 </template>
 
 <script>
-  import store from '@/store'
+  // import store from '@/store'
   export default {
     data () {
       return {
@@ -216,17 +216,6 @@
       }
     },
     mounted () {
-      var profile = {
-        name: 'Aga Atmaja',
-        photo: 'https://hrmlabsv2.s3.ap-southeast-1.amazonaws.com/internal/images/employees/5ae289d216472f28851b6eb2.png?8905',
-        phone: '081213551169',
-        email: 'aga@gmail.com',
-        company: 'agacat',
-        position: 'Developer'
-      }
-      // Save the profile in store
-      store.dispatch('setProfile', profile)
-      console.log(store.getters.profile)
       this.getDataFromApi()
         .then(data => {
           this.desserts = data.items
