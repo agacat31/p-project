@@ -1,10 +1,10 @@
 <template>
   <v-navigation-drawer
-    fixed
-    :clipped="$vuetify.breakpoint.mdAndUp"
-    app
-    :value="drawer"
-  >
+      :value="floatDrawer"
+      temporary
+      right
+      fixed
+    >
     <v-list dense>
       <template v-for="item in items">
         <v-layout
@@ -105,7 +105,7 @@
       ]
     }),
     computed: mapGetters({
-      drawer: 'drawer'
+      floatDrawer: 'floatDrawer'
     }),
     props: {
       source: String

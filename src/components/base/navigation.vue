@@ -22,7 +22,7 @@
     <v-btn icon @click.stop="drawerRight = !drawerRight">
       <v-icon>settings</v-icon>
     </v-btn>
-    <v-btn icon>
+    <v-btn icon @click.stop="floatDrawer = !floatDrawer">
       <v-icon>notifications</v-icon>
     </v-btn>
     <v-btn icon large>
@@ -40,7 +40,8 @@
   export default {
     data: () => ({
       drawer: store.getters.drawer,
-      drawerRight: store.getters.drawerRight
+      drawerRight: store.getters.drawerRight,
+      floatDrawer: store.getters.floatDrawer
     }),
     props: {
       source: String
@@ -51,6 +52,9 @@
       },
       drawerRight (val) {
         store.dispatch('setDrawerRight', this.drawerRight)
+      },
+      floatDrawer (val) {
+        store.dispatch('setFloatDrawer', this.floatDrawer)
       }
     },
     methods: {

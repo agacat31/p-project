@@ -3,7 +3,8 @@ var storage = window.localStorage
 const state = {
   template: {
     drawer: (storage.getItem('drawer') == null) ? true : JSON.parse(storage.getItem('drawer')),
-    drawerRight: (storage.getItem('drawerRight') == null) ? false : JSON.parse(storage.getItem('drawerRight'))
+    drawerRight: (storage.getItem('drawerRight') == null) ? false : JSON.parse(storage.getItem('drawerRight')),
+    floatDrawer: (storage.getItem('floatDrawer') == null) ? false : JSON.parse(storage.getItem('floatDrawer'))
   }
 }
 
@@ -13,6 +14,9 @@ const getters = {
   },
   drawerRight (state) {
     return state.template.drawerRight
+  },
+  floatDrawer (state) {
+    return state.template.floatDrawer
   }
 }
 
@@ -24,6 +28,10 @@ const mutations = {
   setDrawerRight (state, drawerRight) {
     state.template.drawerRight = drawerRight
     storage.setItem('drawerRight', state.template.drawerRight)
+  },
+  setFloatDrawer (state, floatDrawer) {
+    state.template.floatDrawer = floatDrawer
+    storage.setItem('floatDrawer', state.template.floatDrawer)
   }
 }
 
@@ -33,6 +41,9 @@ const actions = {
   },
   setDrawerRight ({ commit }, drawerRight) {
     commit('setDrawerRight', drawerRight)
+  },
+  setFloatDrawer ({ commit }, floatDrawer) {
+    commit('setFloatDrawer', floatDrawer)
   }
 }
 
