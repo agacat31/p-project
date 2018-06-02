@@ -4,6 +4,7 @@
     dark
     app
     :clipped-left="$vuetify.breakpoint.mdAndUp"
+    :clipped-right="$vuetify.breakpoint.mdAndUp"
     fixed
   >
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
@@ -18,8 +19,8 @@
       class="hidden-sm-and-down"
     ></v-text-field>
     <v-spacer></v-spacer>
-    <v-btn icon>
-      <v-icon>apps</v-icon>
+    <v-btn icon @click.stop="drawerRight = !drawerRight">
+      <v-icon>settings</v-icon>
     </v-btn>
     <v-btn icon>
       <v-icon>notifications</v-icon>
@@ -38,7 +39,8 @@
   import store from '@/store'
   export default {
     data: () => ({
-      drawer: store.getters.drawer
+      drawer: store.getters.drawer,
+      drawerRight: store.getters.drawerRight
     }),
     props: {
       source: String
@@ -46,6 +48,9 @@
     watch: {
       drawer (val) {
         store.dispatch('setDrawer', this.drawer)
+      },
+      drawerRight (val) {
+        store.dispatch('setDrawerRight', this.drawerRight)
       }
     },
     methods: {

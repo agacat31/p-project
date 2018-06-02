@@ -1,7 +1,7 @@
 var storage = window.localStorage
 
 const state = {
-  auth: (storage.getItem('auth') == null) ? false : storage.getItem('auth'),
+  auth: (storage.getItem('auth') == null) ? false : JSON.parse(storage.getItem('auth')),
   token: (storage.getItem('token') == null) ? '' : storage.getItem('token')
 }
 
