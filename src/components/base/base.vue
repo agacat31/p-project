@@ -3,7 +3,7 @@
     <sidebarTemplate v-if='auth'></sidebartemplate>
     <sidebarRightTemplate v-if='auth'></sidebarRightTemplate>
     <navbarTemplate v-if='auth'></navbartemplate>
-    <floatSidebarTemplate v-if='auth'></floatSidebarTemplate>
+    <!-- <floatSidebarTemplate v-if='auth'></floatSidebarTemplate> -->
     <contentTemplate></contenttemplate>
   </v-app>
 </template>
@@ -13,14 +13,14 @@
   import Navbar from './navigation.vue'
   import Sidebar from './sidebar.vue'
   import SidebarRight from './sidebarRight.vue'
-  import FloatSidebar from './floatSidebar.vue'
+  // import FloatSidebar from './floatSidebar.vue'
   import Content from './content.vue'
   export default {
     components: {
       'navbarTemplate': Navbar,
       'sidebarTemplate': Sidebar,
       'sidebarRightTemplate': SidebarRight,
-      'floatSidebarTemplate': FloatSidebar,
+      // 'floatSidebarTemplate': FloatSidebar,
       'contentTemplate': Content
     },
     beforeCreate () {

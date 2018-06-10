@@ -2,7 +2,7 @@ var storage = window.localStorage
 
 const state = {
   auth: (storage.getItem('auth') == null) ? false : JSON.parse(storage.getItem('auth')),
-  token: (storage.getItem('token') == null) ? '' : storage.getItem('token')
+  token: (storage.getItem('token') == null) ? null : storage.getItem('token')
 }
 
 const getters = {
