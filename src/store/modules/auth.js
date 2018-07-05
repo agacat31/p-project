@@ -1,3 +1,4 @@
+import axios from 'axios'
 var storage = window.localStorage
 
 const state = {
@@ -21,6 +22,7 @@ const mutations = {
   },
   setToken (state, token) {
     state.token = token
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + state.token
     storage.setItem('token', state.token)
   }
 }

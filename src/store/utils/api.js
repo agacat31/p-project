@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from 'axios'
 import store from '@/store'
 
-axios.defaults.headers.common.Authorization = 'Bearer ' + store.getters.token;
-axios.defaults.baseURL = process.env.API_URL;
+axios.defaults.headers.common.Authorization = 'Bearer ' + store.getters.token
+axios.defaults.baseURL = process.env.API_BASE_URL
 
-const REQUEST_TOKEN_URL = 'auth';
+const REQUEST_TOKEN_URL = 'user/login'
 
 export function login(credentials) {
   return axios.post(REQUEST_TOKEN_URL, {
-    username: credentials.username,
+    email: credentials.email,
     password: credentials.password
-  });
+  })
 }

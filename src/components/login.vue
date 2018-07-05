@@ -11,10 +11,10 @@
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-text-field
                 prepend-icon="person"
-                name="username"
-                label="Username"
-                v-model="username"
-                :rules="usernameRules"
+                name="email"
+                label="Email"
+                v-model="credentials.email"
+                :rules="rules.email"
                 :counter="10"
                 required
                 autofocus
@@ -24,8 +24,8 @@
                 name="password"
                 label="Password"
                 type="password"
-                v-model="password"
-                :rules="passwordRules"
+                v-model="credentials.password"
+                :rules="rules.password"
                 :counter="10"
                 required
               ></v-text-field>
@@ -49,17 +49,22 @@
 </template>
 <script>
   import store from '@/store'
+  import { login } from '../store/utils/api'
   export default {
     data: () => ({
-      username: '',
-      password: '',
-      usernameRules: [
-        v => !!v || 'Username is required',
-        v => (v.length >= 4) || 'Username must have at least 4 letters.'
-      ],
-      passwordRules: [
-        v => !!v || 'Password is required'
-      ],
+      credentials: {
+        email: '',
+        password: ''
+      },
+      rules: {
+        email: [
+          v => !!v || 'Email is required',
+          v => (v.length >= 4) || 'Email must have at least 4 letters.'
+        ],
+        password: [
+          v => !!v || 'Password is required'
+        ]
+      },
       valid: false
     }),
     methods: {
@@ -68,33 +73,27 @@
       },
       login () {
         if (this.$refs.form.validate()) {
-          /* this.$http.post('http://somehost/user/login', {
-            username: this.username,
-            password: this.password
-          }).then(function (response) {
-            if (response.status === 200 && 'token' in response.body) {
+          login(this.credentials)
+            .then((response) => {
               this.$session.start()
-              this.$session.set('jwt', response.body.token)
-              Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
+              this.$session.set('jwt', response.data.token)
+              store.dispatch('setAuth', true)
+              store.dispatch('setToken', response.data.token)
+
+              var profile = {
+                name: 'Aga Atmaja',
+                photo: 'https://hrmlabsv2.s3.ap-southeast-1.amazonaws.com/internal/images/employees/5ae289d216472f28851b6eb2.png?8905',
+                phone: '081213551169',
+                email: 'aga@gmail.com',
+                company: 'agacat',
+                position: 'Developer'
+              }
+              store.dispatch('setProfile', profile)
               this.goTo('home')
-            }
-          }, function (err) {
-            console.log('err', err)
-          }) */
-          this.$session.start()
-          this.$session.set('jwt', 'kjhis76si8juyukser87g9ihksif7u87')
-          store.dispatch('setAuth', true)
-          store.dispatch('setToken', 'kjhis76si8juyukser87g9ihksif7u87')
-          var profile = {
-            name: 'Aga Atmaja',
-            photo: 'https://hrmlabsv2.s3.ap-southeast-1.amazonaws.com/internal/images/employees/5ae289d216472f28851b6eb2.png?8905',
-            phone: '081213551169',
-            email: 'aga@gmail.com',
-            company: 'agacat',
-            position: 'Developer'
-          }
-          store.dispatch('setProfile', profile)
-          this.goTo('home')
+            })
+            .catch((error) => {
+              console.log(error)
+            })
         }
       }
     }
