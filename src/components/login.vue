@@ -75,8 +75,6 @@
         if (this.$refs.form.validate()) {
           login(this.credentials)
             .then((response) => {
-              this.$session.start()
-              this.$session.set('jwt', response.data.token)
               store.dispatch('setAuth', true)
               store.dispatch('setToken', response.data.token)
 

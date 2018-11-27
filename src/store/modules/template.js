@@ -4,7 +4,8 @@ const state = {
   template: {
     drawer: (storage.getItem('drawer') == null) ? true : JSON.parse(storage.getItem('drawer')),
     drawerRight: (storage.getItem('drawerRight') == null) ? false : JSON.parse(storage.getItem('drawerRight')),
-    floatDrawer: (storage.getItem('floatDrawer') == null) ? false : JSON.parse(storage.getItem('floatDrawer'))
+    floatDrawer: (storage.getItem('floatDrawer') == null) ? false : JSON.parse(storage.getItem('floatDrawer')),
+    layout: (storage.getItem('layout') == null) ? 'admin' : storage.getItem('layout')
   }
 }
 
@@ -17,6 +18,9 @@ const getters = {
   },
   floatDrawer (state) {
     return state.template.floatDrawer
+  },
+  setLayout (state) {
+    return state.template.layout
   }
 }
 
@@ -32,6 +36,10 @@ const mutations = {
   setFloatDrawer (state, floatDrawer) {
     state.template.floatDrawer = floatDrawer
     storage.setItem('floatDrawer', state.template.floatDrawer)
+  },
+  setLayout (state, layout) {
+    state.template.layout = layout
+    storage.setItem('setLayout', state.template.layout)
   }
 }
 
@@ -44,6 +52,9 @@ const actions = {
   },
   setFloatDrawer ({ commit }, floatDrawer) {
     commit('setFloatDrawer', floatDrawer)
+  },
+  setLayout ({ commit }, layout) {
+    commit('setLayout', layout)
   }
 }
 

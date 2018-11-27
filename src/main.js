@@ -11,6 +11,10 @@ import VueSession from 'vue-session'
 import 'vuetify/dist/vuetify.min.css'
 import 'vue2-animate/dist/vue2-animate.min.css'
 
+// Layout
+import Admin from './layouts/Admin.vue'
+import Fullscreen from './layouts/Fullscreen.vue'
+
 // Import Store
 import store from './store/index'
 
@@ -18,6 +22,10 @@ Vue.use(Vuetify)
 Vue.use(VueAxios, Axios)
 Vue.use(Vuex)
 Vue.use(VueSession)
+
+// Layout
+Vue.component('admin-layout', Admin)
+Vue.component('fullscreen-layout', Fullscreen)
 
 Vue.config.productionTip = false
 

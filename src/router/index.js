@@ -7,11 +7,13 @@ const Users = () => import('@/components/Users')
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'home',
-      component: HelloWorld
+      meta: { layout: 'admin' },
+      component: HelloWorld,
     },
     {
       path: '/login',
@@ -21,6 +23,7 @@ export default new Router({
     {
       path: '/user',
       name: 'user',
+      meta: { layout: 'admin' },
       component: Users
     }
   ]

@@ -276,11 +276,12 @@
 
       close () {
         this.dialog = false
-        setTimeout(() => {
-          this.$refs.form.reset()
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
+        this.$nextTick(() => {
+            this.editedItem = Object.assign({}, this.defaultItem)
+            this.$refs.form.resetValidation()
+            // this.$refs.form.reset()
+            this.editedIndex = -1
+        })
       },
 
       save () {
